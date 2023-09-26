@@ -60,8 +60,8 @@ SOCIALACCOUNT_PROVIDERS = {
         # (``socialaccount`` app) containing the required client
         # credentials, or list them here:
         'APP': {
-            'client_id': '123',
-            'secret': '456',
+            'client_id': '1076954395904-f0l8qvnjpo8piib4mtdfe05phk2pq19q.apps.googleusercontent.com',
+            'secret': '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',
             'key': ''
         }
     }
@@ -75,6 +75,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'shop.urls'
