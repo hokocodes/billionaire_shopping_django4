@@ -15,5 +15,14 @@
     <h1>My Google Login Project</h1>
     <a href="{% provider_login_url 'google' %}">Login with Google</a>
     {% endif %}
+
+    <div>
+        <form method="POST" action="/">
+            {% csrf_token %}
+            <label for="url_link">Item Link:</label>
+            <input type="text" id="url_link" name="url_link">
+            <button type="submit">BUY</button>
+        </form>
+    </div>
 </body>
 </html>
