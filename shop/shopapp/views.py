@@ -10,8 +10,9 @@ def home(request):
         url_link = request.POST['url_link']
         r = requests.get(url_link)
         soup = bs(r.content)
-        images = soup.find('img')['src']
-        print(images)
+        images = soup.find_all('img')
+        for image in images:
+            print(image['src'])
 
     return render(request, 'home.html')
 
