@@ -23,6 +23,10 @@
             <input type="text" id="url_link" name="url_link">
             <button type="submit">BUY</button>
         </form>
+
+        {% for image in images %}
+        <img src="{{ image }}">
+      {% endfor %}
     </div>
 </body>
 </html>
