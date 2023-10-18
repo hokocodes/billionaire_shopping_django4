@@ -116,7 +116,8 @@ DATABASES = {
         'HOST': 'billionaire-shopping-game-12908.5xj.cockroachlabs.cloud',
         'PORT': '26257',
         'OPTIONS': {
-            'sslmode': 'system'
+            'sslmode': 'system',
+            'sslrootcert': os.path.join(BASE_DIR, 'root.crt'),
         },
     },
 }
