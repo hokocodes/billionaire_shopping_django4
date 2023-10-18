@@ -1,5 +1,7 @@
+from django.http import HttpResponseServerError
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
+from django.template import RequestContext
 import requests
 from bs4 import BeautifulSoup as bs
 from .models import Item
@@ -16,14 +18,15 @@ def home(request):
         url_link = request.POST['url_link']
         r = requests.get(url_link, headers=HEADERS)
         soup = bs(r.content, "lxml")
-        images = soup.find_all('img') 
+        images = soup.find_all('img',{"src":True})
         for image in images:
             images2.append(image['src'])
             print(image['src'])
+        # images2 = images[0].src
 
 
     return render(request, 'home.html', {'images': images2})
 
 def logout_view(request):
     logout(request)
-    return redirect('/')
+    return redirect('home.html')
