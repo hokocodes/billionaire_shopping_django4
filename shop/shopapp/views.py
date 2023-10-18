@@ -11,18 +11,16 @@ HEADERS = ({'User-Agent':
             'Accept-Language': 'en-US, en;q=0.5'})
 
 def home(request):
+    images2 = []
     if request.method == 'POST':
-        try: 
-            url_link = request.POST['url_link']
-            r = requests.get(url_link, headers=HEADERS)
-            soup = bs(r.content, "lxml")
-            images = soup.find_all('img')
-            images2 = []
-            for image in images:
-                images2.append(image['src'])
-                print(image['src'])
-        except: 
-            pass
+        url_link = request.POST['url_link']
+        r = requests.get(url_link, headers=HEADERS)
+        soup = bs(r.content, "lxml")
+        images = soup.find_all('img') 
+        for image in images:
+            images2.append(image['src'])
+            print(image['src'])
+
 
     return render(request, 'home.html', {'images': images2})
 

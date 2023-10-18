@@ -111,7 +111,7 @@ DATABASES = {
         'ENGINE': 'django_cockroachdb',
         'NAME': 'defaultdb',
         'USER': 'hokole',
-        'PASSWORD': 'CT4Rnrv1EvDC9h5s_wyrGA',
+        'PASSWORD': 'jOt5ArtsZpANzqxtAtqSpA',
         'HOST': 'billionaire-shopping-game-12908.5xj.cockroachlabs.cloud',
         'PORT': '26257',
         'OPTIONS': {
