@@ -14,8 +14,10 @@
     {% else %}
     <a href="{% provider_login_url 'google' %}">Login with Google</a>
     {% endif %}
-    <a href="javascript:(function() {let script = document.createElement('script'); script.src = 'bookmarklet.js'; document.body.appendChild(script);})();">Bookmarklet</a>
-
+    {% load static %}
+    <a href="javascript:(function() {let script = document.createElement('script'); script.src = '{% static 'js/bookmarklet.js' %}'; document.body.appendChild(script);})();">Bookmarklet</a>
+    <a href="javascript: (() => {alert('Hello');})();">Helo alert</a>
+    <img width="100px" src="{% static 'images/heart.png' %}">
     <div>
         <form method="POST" action="/">
             {% csrf_token %}
@@ -28,7 +30,7 @@
         <img src="{{ image }}">
         {% endfor %}
     </div>
-
+    <p>Hello. This is Hoko Le.</p>
     {% block content %}{% endblock content %}
 </body>
 </html>
