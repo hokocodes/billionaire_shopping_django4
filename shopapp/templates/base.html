@@ -15,7 +15,7 @@
     <a href="{% provider_login_url 'google' %}">Login with Google</a>
     {% endif %}
     {% load static %}
-    <a href="javascript:(function() {let script = document.createElement('script'); script.src = '{% static 'js/bookmarklet.js' %}'; document.body.appendChild(script);})();">Bookmarklet</a>
+    <a href="javascript:(function() {let script = document.createElement('script'); script.src = '{% static '/js/bookmarklet.js' %}'; document.body.appendChild(script);})();">Bookmarklet</a>
     <a href="javascript: (() => {alert('Hello');})();">Helo alert</a>
     <img width="100px" src="{% static 'images/heart.png' %}">
     <div>

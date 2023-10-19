@@ -1,3 +1,4 @@
+import json
 from django.http import HttpResponseServerError
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
@@ -15,8 +16,10 @@ HEADERS = ({'User-Agent':
 def home(request):
     images2 = []
     if request.method == 'POST':
-        url_link = request.POST['url_link']
-        r = requests.get(url_link, headers=HEADERS)
+        homeurl = request.POST['url_link']
+        bookurl = request.GET.get('url')
+        print(bookurl)
+        r = requests.get(homeurl, headers=HEADERS)
         soup = bs(r.content, "lxml")
         images = soup.find_all('img',{"src":True})
         for image in images:
