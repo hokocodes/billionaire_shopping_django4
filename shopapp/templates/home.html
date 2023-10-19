@@ -1,32 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Sign In</title>
-</head>
-<body>
-    {% load socialaccount %}
-    <h1>My Google Login Project</h1>
-    {% if user.is_authenticated %}
-    <p>Welcome, {{ user.username }} !</p>
-    <a href="logout">Logout</a>
-    {% else %}
-    <h1>My Google Login Project</h1>
-    <a href="{% provider_login_url 'google' %}">Login with Google</a>
-    {% endif %}
+{% extends "base.html" %}
 
-    <div>
-        <form method="POST" action="/">
-            {% csrf_token %}
-            <label for="url_link">Item Link:</label>
-            <input type="text" id="url_link" name="url_link">
-            <button type="submit">BUY</button>
-        </form>
+{% block content %}
 
-        {% for image in images %}
-        <img src="{{ image }}">
-        {% endfor %}
-    </div>
-</body>
-</html>
+{% endblock content %}
