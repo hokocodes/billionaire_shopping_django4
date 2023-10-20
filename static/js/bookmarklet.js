@@ -1,5 +1,5 @@
 (async function() {
-
+    v = 3.7;
     // check prior inclusion and version
     if (window.jQuery === undefined || window.jQuery.fn.jquery < v) {
         var done = false;
@@ -19,17 +19,16 @@
     function initMyBookmarklet() {
         (window.myBookmarklet = function() {
             // your JavaScript code goes here!
+            // window.open("/", "popup", "width=500,height=300");
             const element = document.getElementsByTagName("p");
             element[0].innerHTML = window.location.href;
-        
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             $.ajax({
                 url: '',
-                type: 'get',
+                type: 'POST',
                 data: {
-                    url: window.location.href
-                },
-                success: function(){
-                    window.open('/');
+                    url: window.location.href,
+                    csrfmiddlewaretoken: csrftoken
                 }
             });
         })();

@@ -14,25 +14,34 @@ HEADERS = ({'User-Agent':
             'Accept-Language': 'en-US, en;q=0.5'})
 
 def home(request):
+    images1 = []
     images2 = []
-    
     if request.method == 'POST':
-        homeurl = request.POST['url_link']
-        rh = requests.get(homeurl, headers=HEADERS)
-        soup = bs(rh.content, "lxml")
-        images = soup.find_all('img',{"src":True})
-        appendimages(images, images2)
-    elif request.method == 'GET':
-        bookurl = request.GET.get('url')
-        if bookurl == True:
+        homeurl = request.POST.get('url_link')
+        bookurl = request.POST.get('url')
+        if homeurl != None and homeurl != '':
+            rh = requests.get(homeurl, headers=HEADERS)
+            soup = bs(rh.content, "lxml")
+            images11 = soup.find_all('img',{"src":True})
+            images2.clear()
+            for image in images11:
+                images1.append(image['src'])
+        elif bookurl != None and bookurl != '':
             rb = requests.get(bookurl, headers=HEADERS)
             soupb = bs(rb.content, 'lxml')
-            images = soupb.find_all('img',{"src":True})
-            appendimages(images, images2)
-        else: 
+            images22 = soupb.find_all('img',{"src":True})
+            images2.clear()
+            for image in images22:
+                images2.append(image['src'])
+                print(image['src'])
+            print('images2 arr ')
+            print(images2)
+        else:
             pass
+    else:
+        pass
 
-    return render(request, 'home.html', {'images': images2})
+    return render(request, 'home.html', {'bookimgs': images2})
 
 def logout_view(request):
     logout(request)
@@ -52,7 +61,3 @@ def bookmarklet(request):
 
     return render(request, 'bookmarklet.html', {'images': images3})
 
-def appendimages(images, arr):
-    for image in images:
-        arr.append(image['src'])
-        print(image['src'])
