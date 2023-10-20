@@ -27,6 +27,9 @@
                 type: 'get',
                 data: {
                     url: window.location.href
+                },
+                success: function(){
+                    window.open('/');
                 }
             });
         })();
