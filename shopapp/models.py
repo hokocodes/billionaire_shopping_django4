@@ -10,3 +10,6 @@ class Item(models.Model):
 
     def __str__(self):
             return self.url
+    
+class MyData(models.Model):
+    name = models.CharField(max_length=255)

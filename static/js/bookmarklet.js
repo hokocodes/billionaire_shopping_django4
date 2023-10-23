@@ -24,25 +24,32 @@
             // window.open("/", "popup", "width=500,height=300");
             const element = document.getElementsByTagName("p");
             element[0].innerHTML = window.location.href;
-            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-            $.ajax({
-                url: '',
-                type: 'POST',
-                data: {
-                    url: window.location.href,
-                    csrfmiddlewaretoken: csrftoken
-                },
-                success:function(data){ 
-                    window.myBookmarklet.imagesCallback = function(bookimgs) {
-                        console.log('Fetched images:', bookimgs);
-                        // Update the page here
-                    };
             
-                    // Call the newly defined function
-                    window.myBookmarklet.imagesCallback(data.bookimgs);
-                    window.location = '';
-                }
-            });
+                
+            if (csrfTokenElement) {
+                const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                
+                $.ajax({
+                    url: '',
+                    type: 'POST',
+                    data: {
+                        url: window.location.href,
+                        csrfmiddlewaretoken: csrftoken
+                    },
+                    success:function(data){ 
+                        window.myBookmarklet.imagesCallback = function(bookimgs) {
+                            console.log('Fetched images:', bookimgs);
+                            // Update the page here
+                        };
+                
+                        // Call the newly defined function
+                        window.myBookmarklet.imagesCallback(data.bookimgs);
+                        window.location = '';
+                    }
+                });
+            } else {
+                console.error('CSRF token element not found.');
+            }
             
             
         })();

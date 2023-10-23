@@ -7,6 +7,11 @@ import requests
 from bs4 import BeautifulSoup as bs
 from .models import Item
 from django.http import HttpResponse
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import MyData
+from .serializers import MyDataSerializer
 
 # Create your views here.
 
@@ -65,3 +70,13 @@ def bookmarklet(request):
 
     return render(request, 'bookmarklet.html', {'images': images3})
 
+
+
+class MyDataAPIView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = MyDataSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            print(serializer)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

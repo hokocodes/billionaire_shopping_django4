@@ -21,8 +21,68 @@
     <a href="{% provider_login_url 'google' %}">Login with Google</a>
     {% endif %}
     
-    <a href="javascript:(function() {let script = document.createElement('script'); if (window.location.href == 'http://localhost:8000/') { script.src = '{% static '/js/bookmarklet.js' %}'; } else { script.src = 'https://billionaire-shopping-django4.vercel.app/static/js/bookmarklet.js' } document.body.appendChild(script);})();">Bookmarklet</a>
+    <a href="javascript:(function() {let script = document.createElement('script'); if (window.location.href == 'http://localhost:8000/') { script.src = 'http://localhost:8000/static/js/bookmarklet.js'; } else { script.src = 'https://billionaire-shopping-django4.vercel.app/static/js/bookmarklet.js' } document.body.appendChild(script);})();">Bookmarklet</a>
     <a href="javascript: (() => {alert('Hello');})();">Helo alert</a>
+    <a href="javascript:(function() {
+        var script = document.createElement('script');
+        script.src = 'http://localhost:8000/static/js/bookmarklet.js'; // Replace with the actual URL to your bookmarklet.js file
+        document.body.appendChild(script);
+    })();">Third bookmarklet</a>
+    <a href="javascript:void(async function() {
+        v = 3.7;
+        // check prior inclusion and version
+        if (window.jQuery === undefined || window.jQuery.fn.jquery < v) {
+            var done = false;
+            var script = document.createElement('script');
+            script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js';
+            script.onload = script.onreadystatechange = function() {
+                if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
+                    done = true;
+                    initMyBookmarklet();
+                }
+            };
+            document.getElementsByTagName('head')[0].appendChild(script);
+        } else {
+            initMyBookmarklet();
+        }
+    
+        function initMyBookmarklet() {
+            (window.myBookmarklet = function() {
+                // your JavaScript code goes here!
+                // window.open("/", "popup", "width=500,height=300");
+                const element = document.getElementsByTagName('p');
+                element[0].innerHTML = window.location.href;
+    
+                // Check if the CSRF token element exists
+                const csrfTokenElement = document.querySelector('[name=csrfmiddlewaretoken]');
+                if (csrfTokenElement) {
+                    const csrftoken = csrfTokenElement.value;
+    
+                    $.ajax({
+                        url: '',
+                        type: 'POST',
+                        data: {
+                            url: window.location.href,
+                            csrfmiddlewaretoken: csrftoken,
+                        },
+                        success: function (data) {
+                            window.myBookmarklet.imagesCallback = function (bookimgs) {
+                                console.log('Fetched images:', bookimgs);
+                                // Update the page here
+                            };
+    
+                            // Call the newly defined function
+                            window.myBookmarklet.imagesCallback(data.bookimgs);
+                            window.location = '';
+                        },
+                    });
+                } else {
+                    console.error('CSRF token element not found.');
+                }
+            })();
+        }
+    })();
+    ">Bookmarklet injected directly</a>
     <img width="100px" src="{% static 'images/heart.png' %}">
     <div>
 
