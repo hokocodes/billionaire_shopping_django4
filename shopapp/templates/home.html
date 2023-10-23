@@ -8,9 +8,9 @@
     <img src="{{ image }}">
     {% endfor %} -->
 
-{{ bookimgs }} {% for book in bookimgs %}
+{% for book in bookimgs %}
 <img src="{{ book }}" />
-{{ book }} {% endfor %}
+{% endfor %}
 <script type="text/javascript">
   window.myBookmarklet = window.myBookmarklet || {};
   window.myBookmarklet.imagesCallback = function (bookimgs) {

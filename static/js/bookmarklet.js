@@ -1,3 +1,12 @@
+window.myBookmarklet = window.myBookmarklet || {};
+
+// Define the imagesCallback function
+window.myBookmarklet.imagesCallback = function (bookimgs) {
+    // Update the page with the fetched images
+    console.log('Fetched images:', bookimgs);
+    // You might want to update the page here
+};
+
 (async function() {
     v = 3.7;
     // check prior inclusion and version
@@ -32,6 +41,7 @@
                 },
                 success:function(data){ 
                     window.myBookmarklet.imagesCallback(data.bookimgs);
+                    window.location = '';
                 }
             });
             
