@@ -72,11 +72,23 @@ def bookmarklet(request):
 
 
 
-class MyDataAPIView(APIView):
-    def post(self, request, *args, **kwargs):
-        serializer = MyDataSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            print(serializer)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# class MyDataAPIView(APIView):
+#     def post(self, request, *args, **kwargs):
+#         serializer = MyDataSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             print(serializer)
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def mydata_view(request):
+    if request.method == 'POST':
+        try:
+            data = request.POST.get('test')
+            # Process the data as needed
+            print(data)
+            return JsonResponse(data)
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': 'Invalid JSON data', 'test': test}, status=400)
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
