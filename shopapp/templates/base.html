@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Billionaire Shopping Game</title>
 </head>
@@ -24,22 +25,8 @@
     <a href="javascript: (() => {alert('Hello');})();">Helo alert</a>
     <img width="100px" src="{% static 'images/heart.png' %}">
     <div>
-        <form method="POST" action="/">
+
             
-            <label for="url_link">Item Link:</label>
-            <input type="text" id="url_link" name="url_link" required>
-            <button type="submit">BUY</button>
-        </form>
-            <!-- {% for image in images %}
-            <img src="{{ image }}">
-            {% endfor %} -->
-
-            {% for book in bookimgs %}
-            <!-- <img src="{{ book }}"> -->
-            {{ book }}
-            {% endfor %}
-
-
     </div>
     <p>Hello. This is Hoko Le.</p>
     {% block content %}{% endblock content %}

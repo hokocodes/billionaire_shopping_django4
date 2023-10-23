@@ -29,8 +29,13 @@
                 data: {
                     url: window.location.href,
                     csrfmiddlewaretoken: csrftoken
+                },
+                success:function(data){ 
+                    window.myBookmarklet.imagesCallback(data.bookimgs);
                 }
             });
+            
+            
         })();
     }
     // alert(window.location.href);

@@ -1,5 +1,23 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %} {% csrf_token %}
+<form method="POST" action="/">
+  <label for="url_link">Item Link:</label>
+  <input type="text" id="url_link" name="url_link" required />
+  <button type="submit">BUY</button>
+</form>
+<!-- {% for image in images %}
+    <img src="{{ image }}">
+    {% endfor %} -->
 
-{% block content %}
+{{ bookimgs }} {% for book in bookimgs %}
+<img src="{{ book }}" />
+{{ book }} {% endfor %}
+<script type="text/javascript">
+  window.myBookmarklet = window.myBookmarklet || {};
+  window.myBookmarklet.imagesCallback = function (bookimgs) {
+    // Update the page with the fetched images
+    console.log("Fetched images:", bookimgs);
+    // You might want to update the page here
+  };
+</script>
 
 {% endblock content %}
