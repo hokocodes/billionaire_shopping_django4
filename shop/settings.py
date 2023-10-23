@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-q@+7usd0%9o7#n%$2anq7zu6iok&%_8e^0r*8n6)8+n9yxgaen
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 DEBUG_PROPAGATE_EXCEPTIONS = True
-ALLOWED_HOSTS = ['.vercel.app','now.sh','127.0.0.1','localhost']
+ALLOWED_HOSTS = ['.vercel.app','now.sh','127.0.0.1','localhost',"chrome-extension://igcpolgogcilbbjdlokmkbkkckmlebmn"]
 
 
 # Application definition
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'rest_framework',
+    'corsheaders',
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -72,15 +73,33 @@ SOCIALACCOUNT_PROVIDERS = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "allauth.account.middleware.AccountMiddleware",
+    
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "chrome-extension://igcpolgogcilbbjdlokmkbkkckmlebmn"
+    # Add other origins as needed
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8000',
+    "chrome-extension://igcpolgogcilbbjdlokmkbkkckmlebmn"
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', "chrome-extension://igcpolgogcilbbjdlokmkbkkckmlebmn"]
 ROOT_URLCONF = 'shop.urls'
+CORS_ALLOW_ALL_METHODS = True
 
 TEMPLATES = [
     {

@@ -81,14 +81,10 @@ def bookmarklet(request):
 #             return Response(serializer.data, status=status.HTTP_201_CREATED)
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-def mydata_view(request):
-    if request.method == 'POST':
-        try:
-            data = request.POST.get('test')
-            # Process the data as needed
-            print(data)
-            return JsonResponse(data)
-        except json.JSONDecodeError:
-            return JsonResponse({'status': 'error', 'message': 'Invalid JSON data', 'test': test}, status=400)
-    else:
-        return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
+class MyDataAPIView(APIView):
+    def post(self, request, *args, **kwargs):
+        # Assuming request.data is a dictionary containing your data
+        data = request.data
+        # Process the data as needed, e.g., store in a database
+        print(data)
+        return Response(data, status=status.HTTP_201_CREATED)

@@ -9,7 +9,9 @@
   ],
   "host_permissions": [
     "http://*/*", 
-    "https://*/*"
+    "https://*/*",
+    "http://localhost:8000/*",
+    "<all_urls>"
   ],
   "background": {
     "service_worker": "background.js"
